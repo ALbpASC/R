@@ -1,8 +1,8 @@
 # R
 ## Merge multiple dataframes
 
-# usage: 
-merge_multiple_df(df_list, by, keep.common = TRUE, addNA = FALSE)
+# Function Signature: 
+merge_df(df_list, by, keep.common = TRUE, addNA = FALSE)
 
 # Inputs
 
