@@ -1,5 +1,5 @@
 # R
-## Merge multiple dataframes
+## Merge (multiple) dataframes
 
 # Function Signature: 
 merge_df(df_list, by, keep.common = TRUE, addNA = FALSE)
