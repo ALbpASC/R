@@ -1,0 +1,30 @@
+merge_df <- function(..., by = NULL, common = TRUE, fill = "NA") {
+  dataframes <- list(...)
+  n <- length(dataframes)
+  
+  if (n < 2) {
+    stop("At least two dataframes must be provided.")
+  }
+  
+  common_cols <- Reduce(intersect, lapply(dataframes, colnames))
+  
+  result <- dataframes[[1]]
+  for (i in 2:n) {
+    if (length(by) > 0) {
+      result <- merge(result, dataframes[[i]], by = by, all = TRUE)
+    } else {
+      if (common) {
+        cols_to_merge <- setdiff(colnames(dataframes[[i]]), common_cols)
+        result[, cols_to_merge] <- dataframes[[i]][, cols_to_merge]
+      } else {
+        result <- cbind(result, dataframes[[i]])
+      }
+    }
+  }
+  
+  if (fill != "NA") {
+    result[is.na(result)] <- fill
+  }
+  
+  return(result)
+}
