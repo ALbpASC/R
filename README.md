@@ -26,10 +26,10 @@ collapse_taxa(physeq, ranks = NULL)
 
 ## Usage
 
- 1. Use all available ranks in the phyloseq object
+ 1. Use all available ranks in the phyloseq object 
 physeq_taxa.list <- collapse_taxa(my_physeq)
 
-The returned list might have elements like:
+The returned list have elements like:
  - "physeq.kingdom", "physeq.phylum", "physeq.class", etc.
  - "physeq.asv" (the original object)
 
