@@ -1,4 +1,5 @@
-# R
+# Custom functions for R
+
 ## Merge (multiple) dataframes
 
 # Function Signature: 
@@ -16,3 +17,34 @@ merge_df(df_list, by, keep.common = TRUE, addNA = FALSE)
 # Output
 
 Returns a single dataframe that is the result of merging the input dataframes. The columns will be merged based on the options specified by the by, keep.common, and addNA inputs.
+
+## Collapse phyloseq by taxonomy ranks
+
+# Function signature
+
+collapse_taxa(physeq, ranks = NULL)
+
+## Example with a hypothetical phyloseq object named my_physeq
+
+ 1. Use all available ranks in the phyloseq object
+physeq_taxa.list <- collapse_taxa(my_physeq)
+
+The returned list might have elements like:
+ - "physeq.kingdom", "physeq.phylum", "physeq.class", etc.
+ - "physeq.asv" (the original object)
+
+ 2. Specify only certain ranks
+desired_ranks <- c("Phylum", "Class", "Order", "Family", "Genus", "Species")
+physeq_taxa.list <- collapse_taxa(my_physeq, ranks = desired_ranks)
+
+ Check what's in the returned list
+names(collapsed_subset)
+ e.g. "physeq.phylum", "physeq.class", ..., "physeq.species", "physeq.asv"
+
+## Output
+ 3. Inspect one of the collapsed objects
+ntaxa(physeq_taxa.list[["physeq.genus"]])
+ This shows the number of taxa after collapsing at the genus level.
+
+ 4. If needed, continue downstream analysis
+ For example, subset_samples or prune_taxa on each collapsed object
