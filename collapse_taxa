@@ -1,0 +1,53 @@
+# collapse_taxa.R
+
+#' Collapse a Single Phyloseq Object at Taxonomic Ranks
+#'
+#' Collapses a single phyloseq object at specified (or all) taxonomic ranks
+#' and returns a list containing those collapsed versions plus the original
+#' (ASV-level) phyloseq object.
+#'
+#' @param physeq A phyloseq object.
+#' @param ranks A character vector specifying which ranks to collapse on. 
+#'        If NULL, all ranks from colnames(tax_table(physeq)) will be used.
+#'
+#' @return A named list of phyloseq objects:
+#'   \itemize{
+#'     \item \code{physeq.<rank>} for each collapsed rank
+#'     \item \code{physeq.asv} (the original phyloseq object)
+#'   }
+#'
+#' @examples
+#' \dontrun{
+#' # Example usage:
+#' collapsed_list <- collapse_taxa(my_physeq)
+#'
+#' # collapse at selected ranks only:
+#' collapsed_list_sub <- collapse_taxa(my_physeq, ranks = c("Phylum", "Genus"))
+#' }
+
+collapse_taxa <- function(physeq, ranks = NULL) {
+  
+  # If no ranks are specified, use all ranks from the physeq's tax_table
+  if (is.null(ranks)) {
+    ranks <- colnames(tax_table(physeq))
+  }
+  
+  # Prepare a list to store results
+  collapsed_list <- list()
+  
+  # Collapse by each rank
+  for (r in ranks) {
+    collapsed_obj <- tax_glom(physeq, taxrank = r)
+    collapsed_list[[paste0("physeq.", tolower(r))]] <- collapsed_obj
+  }
+  
+  # Always include the original physeq object (ASV-level)
+  collapsed_list[["physeq.asv"]] <- physeq
+  
+  return(collapsed_list)
+}
+
+# Usage (just in the script for reference):
+# collapsed_list <- collapse_taxa(your_physeq_object)
+# names(collapsed_list)
+# lapply(collapsed_list, ntaxa)
