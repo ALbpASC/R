@@ -24,7 +24,7 @@ Returns a single dataframe that is the result of merging the input dataframes. T
 
 collapse_taxa(physeq, ranks = NULL)
 
-## Example with a hypothetical phyloseq object named my_physeq
+## Usage
 
  1. Use all available ranks in the phyloseq object
 physeq_taxa.list <- collapse_taxa(my_physeq)
