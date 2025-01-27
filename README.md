@@ -35,6 +35,7 @@ The returned list have elements like:
  - "physeq.asv" (the original object)
 
  2. Specify only certain ranks
+
 desired_ranks <- c("Phylum", "Class", "Order", "Family", "Genus", "Species")
 physeq_taxa.list <- collapse_taxa(my_physeq, ranks = desired_ranks)
 
@@ -44,8 +45,10 @@ names(collapsed_subset)
 
 ## Output
  3. Inspect one of the collapsed objects
+
 ntaxa(physeq_taxa.list[["physeq.genus"]])
- This shows the number of taxa after collapsing at the genus level.
+ 
+This shows the number of taxa after collapsing at the genus level.
 
  4. If needed, continue downstream analysis
  For example, subset_samples or prune_taxa on each collapsed object
