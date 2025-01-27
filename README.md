@@ -27,6 +27,7 @@ collapse_taxa(physeq, ranks = NULL)
 ## Usage
 
  1. Use all available ranks in the phyloseq object 
+
 physeq_taxa.list <- collapse_taxa(my_physeq)
 
 The returned list have elements like:
